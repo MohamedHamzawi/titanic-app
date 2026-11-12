@@ -15,11 +15,11 @@ c1, c2, c3, c4 = st.columns(4)
 with c1:
     st.metric("Total passengers",len(df))
 with c2:
-    st.metric("survival_rate", df["Survived"].mean() * 100)
+    st.metric("survival_rate", df["survival"].mean() * 100)
 with c3:
-    st.metric("Median age", df['Age'].median())
+    st.metric("Median age", df['age'].median())
 with c4:
-    st.metric("Median fare",df['Fare'].median())
+    st.metric("Median fare",df['fare'].median())
 show_data = st.checkbox("Show data")
 if show_data:
     st.dataframe(df.head(10), hide_index=True)
