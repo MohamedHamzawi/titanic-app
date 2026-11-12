@@ -2,23 +2,10 @@ import streamlit as st
 
 import pandas as pd
 import plotly.express as px
-import plotly.io as pio
+from Utils.data import load_data
+from Utils.config import ORDERS,COLORS
 
-pio.renderers.default = "plotly_mimetype+notebook_connected"   # plotly.js is loaded from the internet: the saved notebook stays small
-
-df = pd.read_csv("Data/titanic.csv")
-df.columns = df.columns.str.lower()
-df["class"] = df["pclass"].map({1: "First", 2: "Second", 3: "Third"})
-df["survival"] = df["survived"].map({0: "Died", 1: "Survived"})
-df["port"] = df["embarked"].map({"C": "Cherbourg", "Q": "Queenstown", "S": "Southampton"})
-df["family_size"] = df["sibsp"] + df["parch"] + 1
-df["title"] = df["name"].str.extract(r",\s*([^\.]+)\.", expand=False)
-df["age_group"] = pd.cut(df["age"], [0, 12, 18, 35, 60, 80],
-                         labels=["child", "teen", "young adult", "adult", "senior"])
-
-ORDERS = {"class": ["First", "Second", "Third"], "survival": ["Died", "Survived"],
-          "age_group": ["child", "teen", "young adult", "adult", "senior"]}
-COLORS = {"Died": "#D95D4A", "Survived": "#0F766E"}
+df = load_data()
 
 
 st.title("Titanic app")
