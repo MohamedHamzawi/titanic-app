@@ -15,7 +15,7 @@ c1, c2, c3, c4 = st.columns(4)
 with c1:
     st.metric("Total passengers",len(df))
 with c2:
-    st.metric("survival_rate", df["survival"].mean() * 100)
+    st.metric("survival_rate", df["survived"].map({"Died": 0, "Survived": 1}).mean() * 100)
 with c3:
     st.metric("Median age", df['age'].median())
 with c4:
